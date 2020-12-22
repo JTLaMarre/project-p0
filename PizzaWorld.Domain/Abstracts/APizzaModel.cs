@@ -4,17 +4,20 @@ namespace PizzaWorld.Domain.Abstracts
 {
   public abstract class APizzaModel
   {
+    public string Name{ get; set;}
     public string Crust { get; set; }
     public string Size { get; set; }
     public List<string> Toppings { get; set; }
 
     protected APizzaModel()
     {
+      AddName();
       AddCrust();
       AddSize();
       AddToppings();
     }
 
+    protected virtual void AddName() { }
     protected virtual void AddCrust() { }
     protected virtual void AddSize() { }
     protected virtual void AddToppings() { }

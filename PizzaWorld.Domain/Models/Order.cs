@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
@@ -14,7 +15,7 @@ namespace PizzaWorld.Domain.Models
 
         private const string _path = @"./pizzaorder.xml";
 
-
+        public int Total;
 
         public Order()
         {
@@ -27,10 +28,10 @@ namespace PizzaWorld.Domain.Models
         }
         public void DisplayPizzaOptions()
         {
-            System.Console.WriteLine("Pepperoni Pizza");
-            System.Console.WriteLine("Four Cheese Pizza");
-            System.Console.WriteLine("Veggie Pizza");
-            System.Console.WriteLine("Meat Pizza");
+            System.Console.WriteLine("$10 Pepperoni Pizza");
+            System.Console.WriteLine("$10 Four Cheese Pizza");
+            System.Console.WriteLine("$10 Veggie Pizza");
+            System.Console.WriteLine("$10 Meat Pizza");
             System.Console.WriteLine("Choose a Pizza by number or enter 0 to finish adding pizzas to order");
         }
         public int SelectPizza()
@@ -48,7 +49,7 @@ namespace PizzaWorld.Domain.Models
                 Pizzas.Add(_pizzaFactory.Make<PepperoniPizza>());
                 System.Console.WriteLine("Pepperoni Pizza Added to Order");
                 AddPizza();
-
+                Total = Total + 10;
             }
             else if (choice == 2)
             {
@@ -56,6 +57,7 @@ namespace PizzaWorld.Domain.Models
                 Pizzas.Add(_pizzaFactory.Make<FourCheesePizza>());
                 System.Console.WriteLine("Four Cheese Pizza Added to Order");
                 AddPizza();
+                 Total = Total + 10;
 
             }
             else if (choice == 3)
@@ -64,6 +66,7 @@ namespace PizzaWorld.Domain.Models
                 Pizzas.Add(_pizzaFactory.Make<VeggiePizza>());
                 System.Console.WriteLine("Veggie Pizza Added to Order");
                 AddPizza();
+                 Total = Total + 10;
 
             }
             else if (choice == 4)
@@ -72,12 +75,13 @@ namespace PizzaWorld.Domain.Models
                 Pizzas.Add(_pizzaFactory.Make<MeatPizza>());
                 System.Console.WriteLine("Meat Pizza Added to Order");
                 AddPizza();
+                 Total = Total + 10;
 
             }
             else if (choice == 0)
             {
-              System.Console.WriteLine("Finished Ordering..");
-              
+                System.Console.WriteLine("Finished Ordering..");
+
             }
             else
             {
@@ -85,7 +89,7 @@ namespace PizzaWorld.Domain.Models
                 AddPizza();
             }
         }
-
+        
 
 
 

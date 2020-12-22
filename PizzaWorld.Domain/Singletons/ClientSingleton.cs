@@ -27,7 +27,6 @@ namespace PizzaWorld.Domain.Singletons
 
         public List<Store> Stores { get; set; }
         
-        
 
         private ClientSingleton()
         {

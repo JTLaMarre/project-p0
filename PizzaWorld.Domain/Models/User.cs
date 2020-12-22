@@ -15,12 +15,12 @@ namespace PizzaWorld.Domain.Models
             var sb = new StringBuilder();
             foreach (var p in Orders.Last().Pizzas)
             {
-                sb.AppendLine(p.ToString());
+                sb.AppendLine(p.Name);
             }
             {
 
             }
-            return $"You have selected this store {SelectedStore} and order {sb.ToString()}";
+            return $"You have selected this store {SelectedStore} and ordered {sb.ToString()} Total: ${Orders.Last().Total}";
         }
     }
 }

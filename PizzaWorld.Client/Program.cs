@@ -11,7 +11,8 @@ namespace PizzaWorld.Client
         private static readonly ClientSingleton _client = ClientSingleton.Instance;
 
         static void Main(string[] args)
-        {
+        {   
+            
             UserView();
         }
 

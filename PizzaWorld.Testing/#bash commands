@@ -1,0 +1,15 @@
+#bash commands
+-cd
+-mkdir
+-pwd
+-ls
+-touch
+-cat = read file
+-code
+-ssh-keygen
+- nano command line editor
+- sudo = root permission
+-apt = advanced package tool
+-wget = download web service
+
+## dotnet commands
