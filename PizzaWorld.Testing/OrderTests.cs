@@ -18,5 +18,30 @@ namespace PizzaWorld.Testing
             Assert.IsType<Order>(actual);
             Assert.NotNull(actual);
         }
+        [Fact]
+        private void Test_Has_Total()
+        {
+            // arrange
+            var sut = new Order();
+
+            // act
+            var actual = sut.Total;
+
+            // assert
+            Assert.True(actual.GetType() == typeof(int));
+        }
+        [Fact]
+        private void Test_Has_Pizzas()
+        {
+            // arrange
+            var sut = new Order();
+
+            // act
+            var actual = sut.Pizzas;
+
+            // assert
+            Assert.NotNull(actual);
+        }
+     
     }
 }

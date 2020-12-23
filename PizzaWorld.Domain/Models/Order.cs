@@ -7,14 +7,12 @@ using PizzaWorld.Domain.Factories;
 
 namespace PizzaWorld.Domain.Models
 {
-    public class Order
+    public class Order :AEntity
     {
         private GenericPizzaFactory _pizzaFactory = new GenericPizzaFactory();
 
         public List<APizzaModel> Pizzas { get; set; }
-
-        private const string _path = @"./pizzaorder.xml";
-
+        
         public int Total;
 
         public Order()
@@ -22,10 +20,7 @@ namespace PizzaWorld.Domain.Models
             Pizzas = new List<APizzaModel>();
         }
 
-        public void MakeMeatPizza()
-        {
-            Pizzas.Add(_pizzaFactory.Make<MeatPizza>());
-        }
+       
         public void DisplayPizzaOptions()
         {
             System.Console.WriteLine("$10 Pepperoni Pizza");
