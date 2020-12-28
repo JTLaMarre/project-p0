@@ -21,7 +21,7 @@ namespace PizzaWorld.Domain.Models
             {
 
             }
-            return $"You have selected this store {SelectedStore} and ordered {sb.ToString()}Total: ${Orders.Last().Total}";
+            return $"You have selected this store {SelectedStore.Name} and ordered \n {sb.ToString()}Total: ${Orders.Last().Total}";
         }
     }
 }

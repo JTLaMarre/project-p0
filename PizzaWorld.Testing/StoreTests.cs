@@ -20,6 +20,34 @@ namespace PizzaWorld.Testing
             Assert.IsType<Store>(actual);
             Assert.NotNull(actual);
         }
+        [Fact]
+        private void Test_StoreOrdersExists()
+        {
+            // arrange
+            var sut = new Store();
+
+            // act
+            
+            var actual = sut.Orders;
+
+
+            // assert
+            
+            Assert.NotNull(actual);
+        }
+        [Fact]
+        private void Test_StoreRevExists()
+        {
+            // arrange
+            var sut = new Store();
+
+            // act
+            var actual = sut.Revenue;
+
+            // assert
+            Assert.IsType<int>(actual);
+            Assert.NotNull(actual);
+        }
     
     }
 }

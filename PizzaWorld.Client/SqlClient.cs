@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using PizzaWorld.Domain.Models;
@@ -19,14 +20,29 @@ namespace PizzaWorld.Client
         {
             return _db.Stores;
         }
+        
         public void Save(Store store)
         {
             _db.Add(store);
             _db.SaveChanges();
         }
+        public void Update(Store store)
+        {
+            _db.SaveChanges();
+        }
         public void CreateStore()
         {
             Save(new Store());
+        }
+        public Store ReadOne(string name)
+        {
+
+            return _db.Stores.FirstOrDefault(s => s.Name == name); // linq predicate
+        }
+        public Store SelectStore()
+        {
+            string input = Console.ReadLine();
+            return ReadOne(input);
         }
     }
 }

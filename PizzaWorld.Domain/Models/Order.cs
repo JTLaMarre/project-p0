@@ -7,12 +7,13 @@ using PizzaWorld.Domain.Factories;
 
 namespace PizzaWorld.Domain.Models
 {
-    public class Order :AEntity
+    public class Order : AEntity
     {
         private GenericPizzaFactory _pizzaFactory = new GenericPizzaFactory();
 
         public List<APizzaModel> Pizzas { get; set; }
-        
+
+
         public int Total;
 
         public Order()
@@ -20,7 +21,7 @@ namespace PizzaWorld.Domain.Models
             Pizzas = new List<APizzaModel>();
         }
 
-       
+
         public void DisplayPizzaOptions()
         {
             System.Console.WriteLine("$10 Pepperoni Pizza");
@@ -40,38 +41,70 @@ namespace PizzaWorld.Domain.Models
 
             if (choice == 1)
             {
+                // check to see if amount of pizza is less than 50
+                if (Pizzas.Count < 25)
+                {
 
-                Pizzas.Add(_pizzaFactory.Make<PepperoniPizza>());
-                System.Console.WriteLine("Pepperoni Pizza Added to Order");
-                AddPizza();
-                Total = Total + 10;
+                    Pizzas.Add(_pizzaFactory.Make<PepperoniPizza>());
+                    System.Console.WriteLine("Pepperoni Pizza Added to Order");
+                    AddPizza();
+                    Total = Total + 10;
+                }
+                else
+                {
+                    Console.WriteLine("Max Order amount reached");
+
+                }
             }
             else if (choice == 2)
             {
 
-                Pizzas.Add(_pizzaFactory.Make<FourCheesePizza>());
-                System.Console.WriteLine("Four Cheese Pizza Added to Order");
-                AddPizza();
-                 Total = Total + 10;
+                if (Pizzas.Count < 25)
+                {
+
+                    Pizzas.Add(_pizzaFactory.Make<FourCheesePizza>());
+                    System.Console.WriteLine("Four Cheese Pizza Added to Order");
+                    AddPizza();
+                    Total = Total + 10;
+                }
+                else
+                {
+                    Console.WriteLine("Max Order amount reached");
+
+                }
 
             }
             else if (choice == 3)
             {
+                if (Pizzas.Count < 25)
+                {
 
-                Pizzas.Add(_pizzaFactory.Make<VeggiePizza>());
-                System.Console.WriteLine("Veggie Pizza Added to Order");
-                AddPizza();
-                 Total = Total + 10;
+                    Pizzas.Add(_pizzaFactory.Make<VeggiePizza>());
+                    System.Console.WriteLine("Veggie Pizza Added to Order");
+                    AddPizza();
+                    Total = Total + 10;
+                }
+                else
+                {
+                    Console.WriteLine("Max Order amount reached");
 
+                }
             }
             else if (choice == 4)
             {
+                if (Pizzas.Count < 25 )
+                {
 
-                Pizzas.Add(_pizzaFactory.Make<MeatPizza>());
-                System.Console.WriteLine("Meat Pizza Added to Order");
-                AddPizza();
-                 Total = Total + 10;
+                    Pizzas.Add(_pizzaFactory.Make<MeatPizza>());
+                    System.Console.WriteLine("Meat Pizza Added to Order");
+                    AddPizza();
+                    Total = Total + 10;
+                }
+                else
+                {
+                    Console.WriteLine("Max Order amount reached");
 
+                }
             }
             else if (choice == 0)
             {
@@ -84,7 +117,9 @@ namespace PizzaWorld.Domain.Models
                 AddPizza();
             }
         }
+
         
+
 
 
 

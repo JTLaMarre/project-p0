@@ -9,19 +9,24 @@ namespace PizzaWorld.Domain.Models
         {
           Name = "Four Cheese Pizza";
         }
-        protected override void AddCrust()
-        {
-            Crust = "Regular";
-        }
+         protected override void AddCrust()
+    {
+      Crust C = new Crust();
+      Crust = C.type;
+    }
 
-        protected override void AddSize()
-        {
-            Size = "Medium";
-        }
+    protected override void AddSize()
+    {
+      Size S = new Size();
+      Size = S.size;
+    }
 
         protected override void AddToppings()
         {
-            Toppings = "cheese";
+            Toppings tops = new Toppings();
+
+            tops.toppings = "Four Cheeses, Sauce";
+            Toppings = tops.toppings;
       
         }
     }

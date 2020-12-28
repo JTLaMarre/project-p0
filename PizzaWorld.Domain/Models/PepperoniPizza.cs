@@ -9,19 +9,22 @@ namespace PizzaWorld.Domain.Models
         {
           Name = "Pepperoni Pizza";
         }
-    protected override void AddCrust()
+     protected override void AddCrust()
     {
-      Crust = "Regular";
+      Crust C = new Crust();
+      Crust = C.type;
     }
 
     protected override void AddSize()
     {
-      Size = "Medium";
+      Size S = new Size();
+      Size = S.size;
     }
-
     protected override void AddToppings()
     {
-      Toppings = "Pepp";
+     Toppings T = new Toppings();
+      T.toppings = "Pepperoni, Sauce";
+      Toppings = T.toppings;
     }
   }
 }
