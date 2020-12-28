@@ -42,6 +42,19 @@ namespace PizzaWorld.Testing
             // assert
             Assert.NotNull(actual);
         }
+        [Fact]
+        private void Test_Pizzas_Has_Count()
+        {
+            // arrange
+            var sut = new Order();
+
+            // act
+            var actual = sut.Pizzas.Count;
+            
+            // assert
+            Assert.True(actual < 50);
+            Assert.NotNull(actual);
+        }
      
     }
 }
