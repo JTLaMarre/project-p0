@@ -12,6 +12,7 @@ namespace PizzaWorld.Storing
     {
         // Properties are the model for the DB
         public virtual DbSet<Store> Stores { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
 
         public virtual  DbSet<User> Users { get; set; }
 
@@ -20,8 +21,9 @@ namespace PizzaWorld.Storing
         // connect our ORM "EF Core" to DB
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
-            builder.UseSqlServer("Server=tcp:pizzaworld0616.database.windows.net,1433;Initial Catalog=PizzaWorldDB;Persist Security Info=False;User ID=sqladmin;Password=");
+            builder.UseSqlServer("Server=tcp:jacobpizzaworlddb.database.windows.net,1433;Initial Catalog=PizzaWorldDB;Persist Security Info=False;User ID=bob;Password=");
         }
+        
 
         // Tells SQL When building these tables do this 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -46,5 +48,6 @@ namespace PizzaWorld.Storing
                 }
             );
         }
+        
     }
 }

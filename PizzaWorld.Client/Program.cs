@@ -13,7 +13,7 @@ namespace PizzaWorld.Client
         private static readonly SqlClient _sql = new SqlClient();
         static void Main(string[] args)
         {
-
+            
             UserView();
         }
 
@@ -42,8 +42,10 @@ namespace PizzaWorld.Client
             ThisOrder.AddPizza();
             user.SelectedStore.Revenue = user.SelectedStore.Revenue + ThisOrder.Total;
             _sql.Update(user.SelectedStore);
+            _sql.OrdersPizzas(ThisOrder.EntityId);
             Console.WriteLine(user);
-             ViewStoreRev(user.SelectedStore);
+            ViewStoreRev(user.SelectedStore);
+            
 
         }
 
@@ -62,7 +64,7 @@ namespace PizzaWorld.Client
                 Console.WriteLine("Store ID not recognize access to revenue denied");
             }
         }
-
+        
         static void ViewOrderHistory(User u)
         {
             foreach (Order Order in u.Orders)

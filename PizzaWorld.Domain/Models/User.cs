@@ -19,9 +19,9 @@ namespace PizzaWorld.Domain.Models
                 sb.AppendLine(p.Name);
             }
             {
-
+// \n{sb.ToString()}
             }
-            return $"You have selected this store {SelectedStore.Name} and ordered \n{sb.ToString()}\n{Orders.Last().Pizzas.Count}:Pizzas \nTotal: ${Orders.Last().Total}";
+            return $"--- From Store:{SelectedStore.Name} ----- \nPizzas:{Orders.Last().Pizzas.Count}\nTotal: ${Orders.Last().Total}";
         }
     }
 }

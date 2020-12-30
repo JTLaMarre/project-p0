@@ -2,20 +2,61 @@
 
 namespace PizzaWorld.Storing.Migrations
 {
-    public partial class firstmigration : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Crust",
+                columns: table => new
+                {
+                    EntityId = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    type = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Crust", x => x.EntityId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Size",
+                columns: table => new
+                {
+                    EntityId = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    size = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Size", x => x.EntityId);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Stores",
                 columns: table => new
                 {
                     EntityId = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1")
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Revenue = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Stores", x => x.EntityId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Toppings",
+                columns: table => new
+                {
+                    EntityId = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    toppings = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Toppings", x => x.EntityId);
                 });
 
             migrationBuilder.CreateTable(
@@ -38,25 +79,26 @@ namespace PizzaWorld.Storing.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Order",
+                name: "Orders",
                 columns: table => new
                 {
                     EntityId = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    OrderId = table.Column<long>(type: "bigint", nullable: false),
                     StoreEntityId = table.Column<long>(type: "bigint", nullable: true),
                     UserEntityId = table.Column<long>(type: "bigint", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Order", x => x.EntityId);
+                    table.PrimaryKey("PK_Orders", x => x.EntityId);
                     table.ForeignKey(
-                        name: "FK_Order_Stores_StoreEntityId",
+                        name: "FK_Orders_Stores_StoreEntityId",
                         column: x => x.StoreEntityId,
                         principalTable: "Stores",
                         principalColumn: "EntityId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Order_Users_UserEntityId",
+                        name: "FK_Orders_Users_UserEntityId",
                         column: x => x.UserEntityId,
                         principalTable: "Users",
                         principalColumn: "EntityId",
@@ -73,33 +115,43 @@ namespace PizzaWorld.Storing.Migrations
                     Crust = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Size = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Toppings = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    OrderEntityId = table.Column<long>(type: "bigint", nullable: true)
+                    OrderId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Pizzas", x => x.EntityId);
                     table.ForeignKey(
-                        name: "FK_Pizzas_Order_OrderEntityId",
-                        column: x => x.OrderEntityId,
-                        principalTable: "Order",
+                        name: "FK_Pizzas_Orders_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "Orders",
                         principalColumn: "EntityId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "Stores",
+                columns: new[] { "EntityId", "Name", "Revenue" },
+                values: new object[] { 5L, "LaMarrinos", 0 });
+
+            migrationBuilder.InsertData(
+                table: "Stores",
+                columns: new[] { "EntityId", "Name", "Revenue" },
+                values: new object[] { 6L, "Meetzeronis", 0 });
+
             migrationBuilder.CreateIndex(
-                name: "IX_Order_StoreEntityId",
-                table: "Order",
+                name: "IX_Orders_StoreEntityId",
+                table: "Orders",
                 column: "StoreEntityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Order_UserEntityId",
-                table: "Order",
+                name: "IX_Orders_UserEntityId",
+                table: "Orders",
                 column: "UserEntityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Pizzas_OrderEntityId",
+                name: "IX_Pizzas_OrderId",
                 table: "Pizzas",
-                column: "OrderEntityId");
+                column: "OrderId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_SelectedStoreEntityId",
@@ -110,10 +162,19 @@ namespace PizzaWorld.Storing.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Crust");
+
+            migrationBuilder.DropTable(
                 name: "Pizzas");
 
             migrationBuilder.DropTable(
-                name: "Order");
+                name: "Size");
+
+            migrationBuilder.DropTable(
+                name: "Toppings");
+
+            migrationBuilder.DropTable(
+                name: "Orders");
 
             migrationBuilder.DropTable(
                 name: "Users");

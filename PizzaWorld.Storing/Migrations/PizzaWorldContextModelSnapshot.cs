@@ -32,7 +32,7 @@ namespace PizzaWorld.Storing.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long?>("OrderEntityId")
+                    b.Property<long>("OrderId")
                         .HasColumnType("bigint");
 
                     b.Property<string>("Size")
@@ -43,7 +43,7 @@ namespace PizzaWorld.Storing.Migrations
 
                     b.HasKey("EntityId");
 
-                    b.HasIndex("OrderEntityId");
+                    b.HasIndex("OrderId");
 
                     b.ToTable("Pizzas");
                 });
@@ -70,6 +70,9 @@ namespace PizzaWorld.Storing.Migrations
                         .HasColumnType("bigint")
                         .UseIdentityColumn();
 
+                    b.Property<long>("OrderId")
+                        .HasColumnType("bigint");
+
                     b.Property<long?>("StoreEntityId")
                         .HasColumnType("bigint");
 
@@ -82,7 +85,7 @@ namespace PizzaWorld.Storing.Migrations
 
                     b.HasIndex("UserEntityId");
 
-                    b.ToTable("Order");
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("PizzaWorld.Domain.Models.Size", b =>
@@ -168,7 +171,9 @@ namespace PizzaWorld.Storing.Migrations
                 {
                     b.HasOne("PizzaWorld.Domain.Models.Order", null)
                         .WithMany("Pizzas")
-                        .HasForeignKey("OrderEntityId");
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("PizzaWorld.Domain.Models.Order", b =>

@@ -13,12 +13,15 @@ namespace PizzaWorld.Domain.Models
 
         public List<APizzaModel> Pizzas { get; set; }
 
+        public long OrderId {get; set;}
+
 
         public int Total;
 
         public Order()
         {
             Pizzas = new List<APizzaModel>();
+            OrderId = EntityId;
         }
 
 
@@ -44,8 +47,9 @@ namespace PizzaWorld.Domain.Models
                 // check to see if amount of pizza is less than 50
                 if (Pizzas.Count < 25)
                 {
-
-                    Pizzas.Add(_pizzaFactory.Make<PepperoniPizza>());
+                    APizzaModel p =_pizzaFactory.Make<PepperoniPizza>();
+                    p.OrderId=EntityId;
+                    Pizzas.Add(p);
                     System.Console.WriteLine("Pepperoni Pizza Added to Order");
                     AddPizza();
                     Total = Total + 10;
@@ -61,8 +65,9 @@ namespace PizzaWorld.Domain.Models
 
                 if (Pizzas.Count < 25)
                 {
-
-                    Pizzas.Add(_pizzaFactory.Make<FourCheesePizza>());
+                   APizzaModel p = _pizzaFactory.Make<FourCheesePizza>();
+                    p.OrderId = EntityId;
+                    Pizzas.Add(p);
                     System.Console.WriteLine("Four Cheese Pizza Added to Order");
                     AddPizza();
                     Total = Total + 10;
@@ -78,8 +83,9 @@ namespace PizzaWorld.Domain.Models
             {
                 if (Pizzas.Count < 25)
                 {
-
-                    Pizzas.Add(_pizzaFactory.Make<VeggiePizza>());
+                    APizzaModel p = _pizzaFactory.Make<VeggiePizza>();
+                    p.OrderId=EntityId;
+                    Pizzas.Add(p);
                     System.Console.WriteLine("Veggie Pizza Added to Order");
                     AddPizza();
                     Total = Total + 10;
@@ -94,8 +100,9 @@ namespace PizzaWorld.Domain.Models
             {
                 if (Pizzas.Count < 25 )
                 {
-
-                    Pizzas.Add(_pizzaFactory.Make<MeatPizza>());
+                    APizzaModel p = _pizzaFactory.Make<MeatPizza>();
+                    p.OrderId = EntityId;
+                    Pizzas.Add(p);
                     System.Console.WriteLine("Meat Pizza Added to Order");
                     AddPizza();
                     Total = Total + 10;

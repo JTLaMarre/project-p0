@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using PizzaWorld.Domain.Abstracts;
 using PizzaWorld.Domain.Models;
 using PizzaWorld.Storing;
 
@@ -20,7 +22,7 @@ namespace PizzaWorld.Client
         {
             return _db.Stores;
         }
-        
+
         public void Save(Store store)
         {
             _db.Add(store);
@@ -43,6 +45,16 @@ namespace PizzaWorld.Client
         {
             string input = Console.ReadLine();
             return ReadOne(input);
+        }
+        public void OrdersPizzas(long num)
+        {
+            Console.WriteLine("---- You Have Ordered ----");
+            foreach(APizzaModel p in _db.Pizzas)
+            {
+                if(p.OrderId == num){
+                    Console.WriteLine(p.Name);
+                }
+            }
         }
     }
 }
