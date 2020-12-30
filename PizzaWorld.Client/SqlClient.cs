@@ -49,12 +49,19 @@ namespace PizzaWorld.Client
         public void OrdersPizzas(long num)
         {
             Console.WriteLine("---- You Have Ordered ----");
-            foreach(APizzaModel p in _db.Pizzas)
+            foreach (APizzaModel p in _db.Pizzas)
             {
-                if(p.OrderId == num){
-                    Console.WriteLine(p.Name);
+                if (p.OrderId == num)
+                {
+                    Console.WriteLine($"{p.Name} id: {p.EntityId}");
                 }
             }
+        }
+
+        public void DeletePizza(long num)
+        {
+            _db.Remove(_db.Pizzas.Single(p => p.EntityId == num));
+            _db.SaveChanges();
         }
     }
 }
