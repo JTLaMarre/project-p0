@@ -40,9 +40,10 @@ namespace PizzaWorld.Client
             ThisOrder = user.SelectedStore.Orders.Last();
             ThisOrder.DisplayPizzaOptions();
             ThisOrder.AddPizza();
+            _sql.Update(user.SelectedStore);
+            _sql.ReviewOrder(ThisOrder);
             user.SelectedStore.Revenue = user.SelectedStore.Revenue + ThisOrder.Total;
             _sql.Update(user.SelectedStore);
-            _sql.OrdersPizzas(ThisOrder.EntityId);
             Console.WriteLine(user);
             ViewStoreRev(user.SelectedStore);
             

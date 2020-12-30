@@ -57,6 +57,30 @@ namespace PizzaWorld.Client
                 }
             }
         }
+        public IEnumerable<APizzaModel> ReadPizzas()
+        {
+            return _db.Pizzas;
+        }
+
+
+        public void ReviewOrder(Order o)
+        {
+            var p = ReadPizzas();
+            OrdersPizzas(o.EntityId);
+            Console.WriteLine("Type Pizza id to remove from order or 0 to ");
+            long.TryParse(System.Console.ReadLine(), out long input);
+            if (input == 0)
+            {
+                Console.WriteLine("Order Wrapping up");
+                OrdersPizzas(o.EntityId);
+            }
+            else
+            {
+                DeletePizza(input);
+                o.Total=o.Total -10;
+                ReviewOrder(o);
+            }
+        }
 
         public void DeletePizza(long num)
         {
