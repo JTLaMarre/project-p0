@@ -9,6 +9,8 @@ namespace PizzaWorld.Domain.Models
     {
         public List<Order> Orders { get; set; }
         public Store SelectedStore { get; set; }
+
+        public string Name {get;set;}
         
 
         public override string ToString()

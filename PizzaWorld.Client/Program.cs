@@ -26,12 +26,22 @@ namespace PizzaWorld.Client
                 Console.WriteLine(s);
             }
         }
+        static void PrintAllUsersEF()
+        {
+            foreach (var u in _sql.ReadUsers())
+            {
+                Console.WriteLine(u.Name);
+            }
+        }
 
         static void UserView()
         {
-            var user = new User();
+            PrintAllUsersEF();
+            Console.WriteLine("--- Type User Name to select User ---");
+            var user = _sql.SelectUser();
             var ThisOrder = new Order();
             PrintAllStoresEF();
+            Console.WriteLine("--- Type Store Name to select a store ---");
 
             user.SelectedStore = _sql.SelectStore();
             user.SelectedStore.CreateOrder();

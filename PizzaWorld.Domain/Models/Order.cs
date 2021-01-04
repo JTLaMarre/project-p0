@@ -15,6 +15,7 @@ namespace PizzaWorld.Domain.Models
 
         public long OrderId {get; set;}
 
+        
 
         public int Total;
 
@@ -27,10 +28,12 @@ namespace PizzaWorld.Domain.Models
 
         public void DisplayPizzaOptions()
         {
-            System.Console.WriteLine("$10 Pepperoni Pizza");
-            System.Console.WriteLine("$10 Four Cheese Pizza");
-            System.Console.WriteLine("$10 Veggie Pizza");
-            System.Console.WriteLine("$10 Meat Pizza");
+            System.Console.WriteLine("1--$10 Med Pepperoni Pizza");
+            System.Console.WriteLine("2--$10 Med Four Cheese Pizza");
+            System.Console.WriteLine("3--$10 Med Veggie Pizza");
+            System.Console.WriteLine("4--$10 Med Meat Pizza");
+            
+
             System.Console.WriteLine("Choose a Pizza by number or enter 0 to finish adding pizzas to order");
         }
         public int SelectPizza()
@@ -113,6 +116,7 @@ namespace PizzaWorld.Domain.Models
 
                 }
             }
+            
             else if (choice == 0)
             {
                 System.Console.WriteLine("Finished Ordering..");

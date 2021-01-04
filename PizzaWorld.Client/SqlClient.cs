@@ -22,6 +22,20 @@ namespace PizzaWorld.Client
         {
             return _db.Stores;
         }
+        public IEnumerable<User> ReadUsers()
+        {
+            return _db.Users;
+        }
+        public User SelectUser()
+        {
+            string input = Console.ReadLine();
+            return ReadOneUser(input);
+        }
+        public User ReadOneUser(string name)
+        {
+
+            return _db.Users.FirstOrDefault(s => s.Name == name); // linq predicate
+        }
 
         public void Save(Store store)
         {
@@ -61,23 +75,30 @@ namespace PizzaWorld.Client
         {
             return _db.Pizzas;
         }
+        public APizzaModel ReadOneP(long Id)
+        {
+
+            return _db.Pizzas.FirstOrDefault(p => p.EntityId == Id); // linq predicate
+        }
 
 
         public void ReviewOrder(Order o)
         {
             var p = ReadPizzas();
             OrdersPizzas(o.EntityId);
-            Console.WriteLine("Type Pizza id to remove from order or 0 to ");
+            Console.WriteLine("Type Pizza id to remove from order or 0 to verify order is correct.");
             long.TryParse(System.Console.ReadLine(), out long input);
             if (input == 0)
             {
                 Console.WriteLine("Order Wrapping up");
                 OrdersPizzas(o.EntityId);
             }
+            // todo figure out how to check if input is a pizza ID for now just expecting a user not to goof
             else
             {
+                o.Total =o.Total -10;
                 DeletePizza(input);
-                o.Total=o.Total -10;
+
                 ReviewOrder(o);
             }
         }
