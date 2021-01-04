@@ -50,11 +50,11 @@ namespace PizzaWorld.Testing
 
             // act
             var actual = sut.Pizzas.Count;
-            
+
             // assert
             Assert.True(actual < 50);
             Assert.NotNull(actual);
         }
-     
+       
     }
 }

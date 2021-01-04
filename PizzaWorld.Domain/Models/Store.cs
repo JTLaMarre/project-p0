@@ -23,20 +23,7 @@ namespace PizzaWorld.Domain.Models
         // method to delete orders 
 
         // pass order as argument to find order
-        bool DeleteOrder(Order order)
-        {
-            try
-            {
-                // delete the order
-                Orders.Remove(order);
-
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
+        
         public override string ToString()
         {
             return $"{Name}";
