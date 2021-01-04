@@ -13,7 +13,7 @@ namespace PizzaWorld.Client
         private static readonly SqlClient _sql = new SqlClient();
         static void Main(string[] args)
         {
-           
+
             UserView();
         }
 
@@ -33,30 +33,47 @@ namespace PizzaWorld.Client
                 Console.WriteLine(u.Name);
             }
         }
+        static void OrderOrHistory(User u)
+        {
+            Console.WriteLine("--- Hello Returning User -- type 1 to view your order history or 0 to start a new order");
+            int.TryParse(System.Console.ReadLine(), out int input);
+            if (input == 1)
+            {
+                _sql.ReadUsersPizzas(_sql.UsersOrders(u));
+            }
+            else
+            {
+                var ThisOrder = new Order();
+                ThisOrder.UserEntityId = u.EntityId;
+                PrintAllStoresEF();
+                Console.WriteLine("--- Type Store Name to select a store ---");
+                u.SelectedStore = _sql.SelectStore();
+                u.SelectedStore.CreateOrder();
+                u.Orders = u.SelectedStore.Orders;
+                u.Orders.Add(u.SelectedStore.Orders.Last());
+                ThisOrder = u.SelectedStore.Orders.Last();
+                ThisOrder.DisplayPizzaOptions();
+                ThisOrder.AddPizza();
+                _sql.Update();
+                _sql.ReviewOrder(ThisOrder);
+                u.SelectedStore.Revenue = u.SelectedStore.Revenue + ThisOrder.Total;
+                _sql.Update();
+                Console.WriteLine(u);
+                ViewStoreRev(u.SelectedStore);
+            }
+        }
 
         static void UserView()
         {
             PrintAllUsersEF();
             Console.WriteLine("--- Type User Name to select User ---");
             var user = _sql.SelectUser();
-            var ThisOrder = new Order();
-            PrintAllStoresEF();
-            Console.WriteLine("--- Type Store Name to select a store ---");
+            OrderOrHistory(user);
 
-            user.SelectedStore = _sql.SelectStore();
-            user.SelectedStore.CreateOrder();
-            user.Orders = user.SelectedStore.Orders;
-            user.Orders.Add(user.SelectedStore.Orders.Last());
-            ThisOrder = user.SelectedStore.Orders.Last();
-            ThisOrder.DisplayPizzaOptions();
-            ThisOrder.AddPizza();
-            _sql.Update(user.SelectedStore);
-            _sql.ReviewOrder(ThisOrder);
-            user.SelectedStore.Revenue = user.SelectedStore.Revenue + ThisOrder.Total;
-            _sql.Update(user.SelectedStore);
-            Console.WriteLine(user);
-            ViewStoreRev(user.SelectedStore);
-            
+
+
+
+
 
         }
 
@@ -73,14 +90,6 @@ namespace PizzaWorld.Client
             else
             {
                 Console.WriteLine("Store ID not recognize access to revenue denied");
-            }
-        }
-        
-        static void ViewOrderHistory(User u)
-        {
-            foreach (Order Order in u.Orders)
-            {
-                Console.WriteLine(Order.Pizzas + "\n");
             }
         }
     }

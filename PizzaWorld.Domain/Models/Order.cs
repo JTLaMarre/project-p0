@@ -12,17 +12,19 @@ namespace PizzaWorld.Domain.Models
         private GenericPizzaFactory _pizzaFactory = new GenericPizzaFactory();
 
         public List<APizzaModel> Pizzas { get; set; }
+        public long UserEntityId { get; set; }
 
+// TODO Remove then restruct db this number Id isn't used;
         public long OrderId {get; set;}
 
-        
+
 
         public int Total;
 
         public Order()
         {
             Pizzas = new List<APizzaModel>();
-            OrderId = EntityId;
+            
         }
 
 

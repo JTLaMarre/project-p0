@@ -21,7 +21,7 @@ namespace PizzaWorld.Storing
         // connect our ORM "EF Core" to DB
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
-            builder.UseSqlServer("Server=tcp:jacobpizzaworlddb.database.windows.net,1433;Initial Catalog=PizzaWorldDB;Persist Security Info=False;User ID=bob;Password=");
+            builder.UseSqlServer("Server=tcp:jacobpizzaworlddb.database.windows.net,1433;Initial Catalog=PizzaWorldDB;Persist Security Info=False;User ID=bob;Password=pass123!");
         }
         
 

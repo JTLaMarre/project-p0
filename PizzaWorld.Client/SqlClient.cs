@@ -26,6 +26,10 @@ namespace PizzaWorld.Client
         {
             return _db.Users;
         }
+        public IEnumerable<Order> ReadOrders()
+        {
+            return _db.Orders;
+        }
         public User SelectUser()
         {
             string input = Console.ReadLine();
@@ -42,7 +46,7 @@ namespace PizzaWorld.Client
             _db.Add(store);
             _db.SaveChanges();
         }
-        public void Update(Store store)
+        public void Update()
         {
             _db.SaveChanges();
         }
@@ -71,6 +75,28 @@ namespace PizzaWorld.Client
                 }
             }
         }
+        public IEnumerable<Order> UsersOrders(User u)
+        {
+            var o = ReadOrders();
+            List<Order> j = new List<Order>();
+
+            foreach (Order i in o)
+            {
+                if (i.UserEntityId == u.EntityId)
+                {
+                    j.Add(i);
+                }
+            }
+            Console.WriteLine(j.ToString());
+            return j;
+        }
+        public void ReadUsersPizzas(IEnumerable<Order> o)
+        {
+            foreach (Order i in o)
+            {
+                OrdersPizzas(i.EntityId);
+            }
+        }
         public IEnumerable<APizzaModel> ReadPizzas()
         {
             return _db.Pizzas;
@@ -96,7 +122,7 @@ namespace PizzaWorld.Client
             // todo figure out how to check if input is a pizza ID for now just expecting a user not to goof
             else
             {
-                o.Total =o.Total -10;
+                o.Total = o.Total - 10;
                 DeletePizza(input);
 
                 ReviewOrder(o);
@@ -108,5 +134,7 @@ namespace PizzaWorld.Client
             _db.Remove(_db.Pizzas.Single(p => p.EntityId == num));
             _db.SaveChanges();
         }
+
+
     }
 }
