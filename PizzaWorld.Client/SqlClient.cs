@@ -73,7 +73,7 @@ namespace PizzaWorld.Client
                 if (p.OrderId == num)
                 {
                     o = o +10;
-                    Console.WriteLine($"{p.Name} id: {p.EntityId}");
+                    Console.WriteLine($"{p.Name} size:{p.Size}  id: {p.EntityId}");
 
                 }
             }
