@@ -46,7 +46,7 @@ namespace PizzaWorld.Testing
 
             // assert
             Assert.IsType<int>(actual);
-            Assert.NotNull(actual);
+            
         }
     
     }

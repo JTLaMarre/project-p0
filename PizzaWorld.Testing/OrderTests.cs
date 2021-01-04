@@ -53,7 +53,7 @@ namespace PizzaWorld.Testing
 
             // assert
             Assert.True(actual < 50);
-            Assert.NotNull(actual);
+            
         }
        
     }

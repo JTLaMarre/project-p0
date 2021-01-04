@@ -18,5 +18,19 @@ namespace PizzaWorld.Testing
             Assert.IsType<User>(actual);
             Assert.NotNull(actual);
         }
+        [Fact]
+        private void Test_User_Name_Exists()
+        {
+            // arrange
+            var sut = new User();
+
+            // act
+            sut.Name = "bob";
+            var actual = sut.Name;
+
+            // assert
+            Assert.IsType<string>(actual);
+            
+        }
     }
 }
