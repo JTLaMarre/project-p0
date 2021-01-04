@@ -66,14 +66,18 @@ namespace PizzaWorld.Client
         }
         public void OrdersPizzas(long num)
         {
-            Console.WriteLine("---- You Have Ordered ----");
+            Console.WriteLine("---- ORDER ----");
+            int o = 0;
             foreach (APizzaModel p in _db.Pizzas)
             {
                 if (p.OrderId == num)
                 {
+                    o = o +10;
                     Console.WriteLine($"{p.Name} id: {p.EntityId}");
+
                 }
             }
+            Console.WriteLine($"Total:${o}");
         }
         public IEnumerable<Order> UsersOrders(User u)
         {
@@ -87,7 +91,7 @@ namespace PizzaWorld.Client
                     j.Add(i);
                 }
             }
-            Console.WriteLine(j.ToString());
+            
             return j;
         }
         public void ReadUsersPizzas(IEnumerable<Order> o)
